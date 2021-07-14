@@ -14,10 +14,14 @@
 				$Email = $_POST['Email'];
 				$Password = md5($_POST['Password']);
 				$UserType = 'USER';
+				$Age = $_POST['Age'];
+				$Height = $_POST['Height'];
+				$Weight = $_POST['Weight'];
+                $bmi = 10000 * ($Weight/($Height * $Height));
 				$CreatedDate = $date_object = date('Y-m-d H:i:s');
 
-				$sql = "INSERT INTO users( MembershipId, Name, UserType, Email, Password, MobileNo, CreatedDate) "
-					. " VALUES ('','$Name','$UserType','$Email','$Password','$MobileNo', '$CreatedDate')";
+				$sql = "INSERT INTO users( MembershipId, Name, UserType, Email, Password, MobileNo, CreatedDate, Age, Weight, Height, BMI) "
+					. " VALUES ('','$Name','$UserType','$Email','$Password','$MobileNo', '$CreatedDate', '$Age', '$Weight', '$Height', '$bmi')";
 						
 				$response['errorfound'] = "1";
 				$response['message'] = 'Not added';
