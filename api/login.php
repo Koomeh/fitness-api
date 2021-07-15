@@ -31,6 +31,10 @@
 							$response['MobileNo'] = $row['MobileNo'];
 							$response['CreatedDate'] = $row['CreatedDate'];
 
+							$response['Age'] = $row['Age'];
+							$response['Weight'] = $row['Weight'];
+							$response['Height'] = $row['Height'];
+							$response['BMI'] = $row['BMI'];
 							$response['errorfound'] = "0";
 							$response['message'] = 'Login Successfull';
 							mysqli_close($conn);
