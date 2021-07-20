@@ -10,9 +10,6 @@
 			if($_SERVER['REQUEST_METHOD'] == 'POST')
 			{
 				$sql = "SELECT * FROM meals";
-						
-				// $response['errorfound'] = "1";
-				// $response['message'] = 'No Workout Found added';
 
 				$response['meals'] = array();
 				try
@@ -24,17 +21,14 @@
 
 						while($row = mysqli_fetch_assoc($result))
 						{
-							$workout['MealId'] = $row['MealId'];
-							$workout['MealName'] = $row['MealName'];
-							$workout['MealType'] = $row['MealType'];
-							$workout['Ingredients'] = $row['Ingredients'];
-							$workout['Image'] = $row['Image'];
-							$workout['CreatedDate'] = $row['CreatedDate'];
+							$meal['MealId'] = $row['MealId'];
+							$meal['Type'] = $row['Type'];
+							$meal['Calories'] = $row['Calories'];
+							$meal['Day'] = $row['Day'];
+							$meal['UserId'] = $row['UserId'];
+							$meal['UserEmail'] = $row['UserEmail'];
 
-							$workout['errorfound'] = "0";
-							$workout['message'] = 'Login Successfull';
-
-							array_push($response['meals'], $workout);
+							array_push($response['meals'], $meal);
 						}
 						mysqli_close($conn);
 					}

@@ -9,29 +9,23 @@
 		{
 			if($_SERVER['REQUEST_METHOD'] == 'POST')
 			{
-				$sql = "SELECT * FROM diets";
-						
-				$response['errorfound'] = "1";
-				$response['message'] = 'No Diet Found';
+				$sql = "SELECT * FROM ingredients";
 
-				$response['diets'] = array();
+				$response['ingredients'] = array();
 				try
 				{
 					if($result = mysqli_query($conn, $sql))
 					{
 						$response['errorfound'] = "0";
-						$response['message'] = '';
+						$response['message'] = 'success';
 
 						while($row = mysqli_fetch_assoc($result))
-						{                          
-							$diet['DietId'] = $row['DietId'];
-							$diet['Name'] = $row['Name'];
-							$diet['Type'] = $row['Type'];
-							$diet['Description'] = $row['Description'];
-							$diet['Image'] = $row['Image'];
-							$diet['Calories'] = $row['Calories'];
-							$diet['Day'] = $row['Day'];
-							array_push($response['diets'], $diet);
+						{
+							$ingredient['IngredientId'] = $row['IngredientId'];
+							$ingredient['Name'] = $row['Name'];
+							$ingredient['Calories'] = $row['Calories'];
+
+							array_push($response['ingredients'], $ingredient);
 						}
 						mysqli_close($conn);
 					}
@@ -44,7 +38,7 @@
 			}
 			else
 			{
-				$response['message'] = "Error occured during fetching diets";
+				$response['message'] = "Error occured fetch";
 				$response['errorfound'] = "1";
 			}
 			break;
