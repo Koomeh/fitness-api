@@ -9,23 +9,23 @@
 		{           
 			if($_SERVER['REQUEST_METHOD'] == 'POST')
 			{
-				$Type = $_POST['Type'];
+				$IngredientName = $_POST['Name'];
 				$Calories = $_POST['Calories'];
-				$Day = $_POST['Day'];
-				$UserId = $_POST['UserId'];
+				$Quantity = $_POST['Quantity'];
+				$IngredientId = $_POST['IngredientId'];
 				$UserEmail = $_POST['UserEmail'];
+				$MealType = $_POST['MealType'];
 
-				$sql = "INSERT INTO meals(Type, Calories, Day, UserId, UserEmail) "
-					. " VALUES ('$Type','$Calories','$Day','$UserId', '$UserEmail')";
+				$sql = "UPDATE meals SET IngredientName='$IngredientName',  Calories='$Calories', Quantity='$Quantity', "
+                     . " IngredientId='$IngredientId' WHERE UserEmail='$UserEmail' AND Type='$MealType' ";
 						
 				$response['errorfound'] = "1";
-				$response['message'] = 'Not added';
+				$response['message'] = 'Not updated';
 				try
 				{
 					if(mysqli_query($conn, $sql))
 					{
 						$response['errorfound'] = '0';
-                        $response['mealType'] = $Type;
 						$response['message'] = 'success';
 					}
 				
