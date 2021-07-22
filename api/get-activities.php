@@ -9,12 +9,12 @@
 		{
 			if($_SERVER['REQUEST_METHOD'] == 'POST')
 			{
-				$sql = "SELECT * FROM exercises";
+				$sql = "SELECT * FROM activities";
 						
-				// $response['errorfound'] = "1";
-				// $response['message'] = 'No Workout Found added';
+				$response['errorfound'] = "1";
+				$response['message'] = 'No Activity Found added';
 
-				$response['workouts'] = array();
+				$response['activities'] = array();
 				try
 				{
 					if($result = mysqli_query($conn, $sql))
@@ -26,20 +26,22 @@
 						while($row = mysqli_fetch_assoc($result))
 						{
                             $record_found = 1;
-							$workout['ExerciseId'] = $row['ExerciseId'];
-							$workout['ExerciseName'] = $row['ExerciseName'];
-							$workout['Description'] = $row['Description'];
-							$workout['Image'] = $row['Image'];
-							$workout['CreatedDate'] = $row['CreatedDate'];
+							$activity['ActivityId'] = $row['ActivityId'];
+							$activity['Name'] = $row['Name'];
+							$activity['Description'] = $row['Description'];
+							$activity['Duration'] = $row['Duration'];
+							$activity['BurnedCalories'] = $row['BurnedCalories'];
+							$activity['Image'] = $row['Image'];
+							$activity['CreatedDate'] = $row['CreatedDate'];
 
-							array_push($response['workouts'], $workout);
+							array_push($response['activities'], $activity);
 						}
 						mysqli_close($conn);
 
                         if($record_found)
                         {
 							$response['errorfound'] = "0";
-							$response['message'] = 'Workouts found';
+							$response['message'] = 'Activities found';
 
                         }
 					}
