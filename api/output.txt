@@ -1,1 +1,1 @@
-Dinner1002021-07-211kev@yahoo.com
+$UserEmail : kev@yahoo.com$sql : SELECT * FROM personalactivities WHERE UserEmail='kev@yahoo.com'
