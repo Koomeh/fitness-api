@@ -48,7 +48,7 @@
                         fclose($file);                             
                         if(mysqli_query($conn, $sql))
                         {
-                            $response['message'] = 'History Updated';
+                            $response['message'] = $response['message'] .'. History Updated';
                         }
 					}
 				
