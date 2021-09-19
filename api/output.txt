@@ -1,1 +1,1 @@
-$UserEmail : kev@yahoo.com$sql : SELECT * FROM history WHERE Email='kev@yahoo.com'
+$UserEmail : cathy@gmail.com$sql : SELECT * FROM personalactivities WHERE UserEmail='cathy@gmail.com'

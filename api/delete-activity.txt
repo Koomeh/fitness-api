@@ -1,0 +1,1 @@
+$PersonalActivityId : \n$sql : DELETE FROM meals WHERE MealId='15'\n

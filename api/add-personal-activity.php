@@ -14,7 +14,27 @@
 				$Met = $_POST['Met'];
 				$Weight = $_POST['Weight'];
 				$Duration = $_POST['Duration'];
-				$BurnedCalories = 100;
+
+                $calories = 0;
+                if($Duration > 30 && $Duration <= 60)
+                {
+                    $calories = 400;
+                }
+                if($Duration > 60 && $Duration <= 120)
+                {
+                    $calories = 600;
+                }
+                if($Duration > 120)
+                {
+                    $calories = 1000;
+                }
+
+                $file = fopen("calories.txt","w");
+                fwrite($file, 'Duration : '.$Duration.'\n');
+                fwrite($file, 'calories : '.$calories.'\n');
+                fclose($file);                
+
+				$BurnedCalories = strval($calories);
                 $lst = explode("/", $_POST['Image']);
 	            $length = count($lst);
                 $Image = $lst[$length - 1];

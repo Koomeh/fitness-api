@@ -1,6 +1,18 @@
 <?php
     include 'db_config.php';
 
+	$inputJSON = file_get_contents('php://input');
+	if(get_magic_quotes_gpc())
+    {
+		$param = stripslashes($inputJSON);
+	}
+	else
+    {
+		$param = $inputJSON;
+	}
+
+	$input = json_decode($param, TRUE);
+
 	try
 	{
 		$conn = new mysqli($HostName, $UserName, $UserPassword, $DatabaseName);
@@ -9,12 +21,10 @@
 		{
 			if($_SERVER['REQUEST_METHOD'] == 'POST')
 			{
-				$sql = "SELECT * FROM exercises";
-						
-				// $response['errorfound'] = "1";
-				// $response['message'] = 'No Workout Found added';
+				$userEmail = $input['UserEmail'];
+				$sql = "SELECT * FROM meals where UserEmail = '$userEmail'";
 
-				$response['workouts'] = array();
+				$response['meals'] = array();
 				try
 				{
 					if($result = mysqli_query($conn, $sql))
@@ -22,27 +32,18 @@
 						$response['errorfound'] = "0";
 						$response['message'] = '';
 
-                        $record_found = 0;
 						while($row = mysqli_fetch_assoc($result))
 						{
-                            $record_found = 1;
-							$workout['ExerciseId'] = $row['ExerciseId'];
-							$workout['ExerciseName'] = $row['ExerciseName'];
-							$workout['Description'] = $row['Description'];
-							$workout['Mistakes'] = $row['Mistakes'];
-							$workout['Image'] = $row['Image'];
-							$workout['CreatedDate'] = $row['CreatedDate'];
+							$meal['MealId'] = $row['MealId'];
+							$meal['Type'] = $row['Type'];
+							$meal['Calories'] = $row['Calories'];
+							$meal['Day'] = $row['Day'];
+							$meal['UserId'] = $row['UserId'];
+							$meal['UserEmail'] = $row['UserEmail'];
 
-							array_push($response['workouts'], $workout);
+							array_push($response['meals'], $meal);
 						}
 						mysqli_close($conn);
-
-                        if($record_found)
-                        {
-							$response['errorfound'] = "0";
-							$response['message'] = 'Workouts found';
-
-                        }
 					}
 				}
 				catch(Exception $e)
